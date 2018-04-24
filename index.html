@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Psychics Extra</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <script id="templateCards" type="text/html">
+            {% for card in lot %}
+            <span class="border border-primary m5">{{ card }}</span>
+            {% endfor %}
+    </script>
+
+    <script id="templateExtra" type="text/html">
+        {% for psychic, value in lot %}
+        <span class="border border-primary m5">{{ psychic }}: {{ value.history | last }}</span>
+        {% endfor %}
+    </script>
+
+    <script id="templateWin" type="text/html">
+        <span class="border border-primary m5">Победил {{ lot }}</span>
+    </script>
+
+    <script id="templateChecksHistory" type="text/html">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th scope="row">Ранее вы проверяли</th>
+                {% for value in lot %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    </script>
+
+    <script id="templateHistory" type="text/html">
+        <table class="table">
+            <tbody>
+            <tr>
+                {% for psychic, value in lot %}
+                <th scope="row">{{ psychic }}, Достоверность: {{ value.reliability }}</th>
+                {% for history in value.history %}
+                <td>{{ history }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            1. Загадайте одно из этих чисел
+        </div>
+        <div class="col-sm" id="list">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            2. Нажмите кнопку
+        </div>
+        <div class="col-sm">
+            <button type="button" class="btn btn-primary" id="extra">Запросить догадки</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            3. Получите предсказание
+        </div>
+        <div class="col-sm" id="extra-list">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            4. Введите загадонное число
+        </div>
+        <div class="col-sm">
+            <div class="input-group mb-3" id="check-button-group">
+                <input type="text" class="form-control" placeholder="Ваше число" aria-label="Ваше число"
+                       aria-describedby="basic-addon2" id="check-number" style="max-width: 150px">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button" id="check">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            5. Угадал
+        </div>
+        <div class="col-sm" id="win">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" id="checks-history">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" id="history">
+
+        </div>
+    </div>
+</div>
+
+
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/nunjucks.min.js"></script>
+<script src="js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>
